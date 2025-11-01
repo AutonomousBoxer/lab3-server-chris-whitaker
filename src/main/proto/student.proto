@@ -1,0 +1,33 @@
+/*
+  Author: Chris Whitaker
+  Purpose: Defines (Student, StudentID) messages and two RPCs (addStudent, getStudent)
+*/
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "edu.franklin.lab3server.chriswhitaker";
+option java_outer_classname = "StudentProto";
+
+package studentinfo;
+
+service StudentInfo  {
+  // Adds a student and returns generated id
+  rpc addStudent (Student) returns (StudentID) {}
+
+  // Looks up student by id and returns a student or NOT_FOUND if missing
+  rpc getStudent (StudentID) returns (Student) {}
+}
+
+// Student payload
+message Student {
+  string name = 1;
+  string phone = 2;
+  string age = 3;
+  string zip = 4;
+}
+
+// Id returned by addStudent and used by getStudent
+message StudentID  {
+  string value = 1;
+}

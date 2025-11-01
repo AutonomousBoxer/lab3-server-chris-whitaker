@@ -1,15 +1,55 @@
 # lab3-server-chris-whitaker
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Author: `Chris Whitaker`
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Quarkus **gRPC** server implementing a simple `StudentInfo` service.  
+Supports two RPCs:
+- `addStudent(Student)`: stores a student and returns a generated id.
+- `getStudent(StudentID)`: returns the student or `NOT_FOUND` if missing.
 
-## Running the application in dev mode
+## Setup Environment
 
-You can run your application in dev mode that enables live coding using:
+- Java 17+
+  - [Eclipse Temurin JDK 17 (Adoptium)](https://adoptium.net/temurin/releases/?version=17)
+  - [Oracle JDK 17 Downloads](https://www.oracle.com/java/technologies/downloads/)
+- Maven 3.9+
+  - [maven.apache.org/install.html](https://maven.apache.org/install.html)
+
+**Verify installs**
+
+```bash
+java -version
+mvn -version
+```
+
+## How to Run the Code
+
+Run the application in dev mode using:
+
+```shell script
+./mvnw clean compile
+```
 
 ```shell script
 ./mvnw quarkus:dev
+```
+## File Structure
+
+    src/
+        main/
+            java/edu/franklin/lab3server/chriswhitaker/StudentInfoImpl.java
+            proto/student.proto
+            resources/application.properties
+    target/
+        generated-sourcees/grpc/... (generated stubs; do not edit)
+
+## Known Issues
+- Repository is in-memory and data is lost on restart
+- If your IDE can't find `StudentInfoGrpc`, make sure `target/generated-sources/grpc` is marked as a _Generated 
+  Sources Root_ 
+- Then Run:
+```shell script
+./mvnw clean compile
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
